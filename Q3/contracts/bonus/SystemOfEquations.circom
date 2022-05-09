@@ -1,7 +1,7 @@
 pragma circom 2.0.0;
 
 include "../../node_modules/circomlib/circuits/comparators.circom";
-include ""; // hint: you can use more than one templates in circomlib-matrix to help you
+include "../../node_modules/circomlib-matrix/circuits/matElemSum.circom"; // hint: you can use more than one templates in circomlib-matrix to help you
 
 template SystemOfEquations(n) { // n is the number of variables in the system of equations
     signal input x[n]; // this is the solution to the system of equations
@@ -10,6 +10,11 @@ template SystemOfEquations(n) { // n is the number of variables in the system of
     signal output out; // 1 for correct solution, 0 for incorrect solution
 
     // [bonus] insert your code here
+    component sum = matElemSum(A, b);
+    for(var i=0; i<n; i++) {
+        sum.b[n] <== A.x[n];
+        out <== sum.b[n];
+    }
 }
 
 component main {public [A, b]} = SystemOfEquations(3);

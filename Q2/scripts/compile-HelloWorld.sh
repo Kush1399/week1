@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #!/bin/bash
 
 cd contracts/circuits
